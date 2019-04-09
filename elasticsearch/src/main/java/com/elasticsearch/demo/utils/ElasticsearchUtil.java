@@ -19,11 +19,23 @@ public class ElasticsearchUtil {
     @Resource
     private TransportClient transportClient;
 
+    /**
+     * 判断索引是否存在
+     * @param index
+     * @return
+     */
     public boolean isIndexExist(String index) {
         IndicesExistsResponse indicesExistsResponse = transportClient.admin().indices().exists(new IndicesExistsRequest(index)).actionGet();
         return indicesExistsResponse.isExists();
     }
 
+    /**
+     * 根据ID查询
+     * @param index
+     * @param type
+     * @param id
+     * @return
+     */
     public Map<String, Object> searchDataById(String index, String type, String id){
         GetRequestBuilder getRequestBuilder = transportClient.prepareGet(index, type, id);
         return getRequestBuilder.execute().actionGet().getSource();
