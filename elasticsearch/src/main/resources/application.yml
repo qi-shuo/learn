@@ -1,0 +1,9 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      properties:
+        path:
+          logs: ./path/to/logs #elasticsearch日志存储目录
+          data: ./path/to/data #elasticsearch数据存储目录
+      cluster-nodes: 127.0.0.1:9300
