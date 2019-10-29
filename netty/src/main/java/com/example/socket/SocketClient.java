@@ -1,4 +1,4 @@
-package com.example.netty;
+package com.example.socket;
 
 
 import java.io.DataInputStream;
@@ -13,11 +13,11 @@ import java.net.SocketAddress;
  * @version 1.0
  * @create 2018/11/15 2:02 PM
  */
-public class NettyClient {
+public class SocketClient {
     public static void main(String[] args) {
         Socket client = null;
         try {
-            client = new Socket("127.0.0.1", 8081);
+            client = new Socket("127.0.0.1", 8080);
             SocketAddress remoteSocketAddress = client.getRemoteSocketAddress();
             System.out.println("远程主机:" + remoteSocketAddress.toString());
             OutputStream outputStream = client.getOutputStream();

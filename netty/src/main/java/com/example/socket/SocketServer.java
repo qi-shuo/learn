@@ -1,4 +1,4 @@
-package com.example.netty;
+package com.example.socket;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,10 +11,10 @@ import java.net.Socket;
  * @version 1.0
  * @create 2018/11/15 2:23 PM
  */
-public class NettyServer {
+public class SocketServer {
     private ServerSocket serverSocket;
 
-    public NettyServer(int port) {
+    public SocketServer(int port) {
         try {
             this.serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(1000000);
@@ -48,7 +48,7 @@ public class NettyServer {
     }
 
     public static void main(String[] args) {
-        Runnable runnable=()->new NettyServer(8081).run();
+        Runnable runnable=()->new SocketServer(8080).run();
         runnable.run();
     }
 }
