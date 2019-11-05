@@ -22,7 +22,7 @@ public class BlockClient {
         byteBuffer.clear();
         //告诉服务器已经写完了
         client.shutdownOutput();
-        while (client.read(byteBuffer) != -1) {
+        if (client.read(byteBuffer) != -1) {
             //切换成读模式
             byteBuffer.flip();
             byte[] bytes = new byte[byteBuffer.limit()];

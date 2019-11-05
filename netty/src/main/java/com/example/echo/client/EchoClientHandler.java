@@ -23,7 +23,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
      * @throws Exception
      */
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
         //记录接收消息的存储
         System.out.println("client received: " + msg.toString(CharsetUtil.UTF_8));
     }

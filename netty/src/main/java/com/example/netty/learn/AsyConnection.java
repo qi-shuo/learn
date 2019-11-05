@@ -21,7 +21,7 @@ public class AsyConnection {
 
     public void asyConnection() {
         Channel channel = new LocalServerChannel();
-        //异步的链接大鹏远程节点
+        //异步的链接远程节点
         ChannelFuture channelFuture = channel.connect(new InetSocketAddress("127.0.0.1", 80));
         //注册一个channelFutureListener以便操作完成后获取通知
         channelFuture.addListener((ChannelFutureListener) future -> {

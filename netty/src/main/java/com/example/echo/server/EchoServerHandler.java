@@ -2,10 +2,7 @@ package com.example.echo.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.*;
 import io.netty.util.CharsetUtil;
 
 /**
@@ -15,7 +12,7 @@ import io.netty.util.CharsetUtil;
  * @ChannelHandler.Sharable 标记一个channelHandler是共享的
  */
 @ChannelHandler.Sharable
-public class EchoServerHandler extends ChannelHandlerAdapter {
+public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     /**
      * 读
      * 对于每个传入的消息都要调用
