@@ -7,16 +7,17 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import com.example.twelfth.server.handler.HttpRequestHandler;
 
+import java.util.concurrent.*;
+
 /**
  * 第十二章 聊天室的实现
  * 处理文本帧
  * WebSocket是以帧的方式传输数据,每一帧代表消息的一部分,一个完整的消息可能包含许多帧
- *
- *
+ * <p>
+ * <p>
  * 新的WebSocket握手成功后,
  * 他将消息写入到ChannelGroup中所有的Channel来通知所有已连接的客户端,
  * 然后将新的Channel加入到该ChannelGroup
- *
  *
  * @author QiShuo
  * @version 1.0
@@ -54,7 +55,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         //如果握手成功则从该ChannelPipeline中移除HttpRequestHandler因为将不会接受任何HTTP消息了
         if (evt instanceof WebSocketServerProtocolHandler.HandshakeComplete) {
-           ctx.pipeline().remove(HttpRequestHandler.class);
+            ctx.pipeline().remove(HttpRequestHandler.class);
             //通知所有链接的webSocket客户端,新的客户端已经链接上
             group.writeAndFlush(new TextWebSocketFrame("Client " + ctx.channel() + " joined"));
             //将新的WebSocket Channel添加到ChannelGroup中,以便他可以接收到所有的消息
@@ -63,4 +64,5 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
             super.userEventTriggered(ctx, evt);
         }
     }
+
 }
