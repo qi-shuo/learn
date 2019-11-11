@@ -1,4 +1,4 @@
-package com.example.udp.encoder;
+package com.example.udp.coder;
 
 import com.example.udp.pojo.LogEvent;
 import io.netty.buffer.ByteBuf;

@@ -1,6 +1,6 @@
 package com.example.udp.broadcaster;
 
-import com.example.udp.encoder.LogEventEncoder;
+import com.example.udp.coder.LogEventEncoder;
 import com.example.udp.pojo.LogEvent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -12,9 +12,6 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 
 /**
@@ -29,7 +26,7 @@ public class LogEventBroadcaster {
     private final Bootstrap bootstrap;
     private final File file;
 
-    public LogEventBroadcaster(InetSocketAddress address, Bootstrap bootstrap, File file) {
+    public LogEventBroadcaster(InetSocketAddress address, File file) {
         this.group = new NioEventLoopGroup();
         this.bootstrap = new Bootstrap();
         //引导该NioDatagramChannel(无连接的)
@@ -78,5 +75,15 @@ public class LogEventBroadcaster {
         group.shutdownGracefully();
     }
 
+    public static void main(String[] args) {
+        LogEventBroadcaster broadcaster = new LogEventBroadcaster(new InetSocketAddress("127.0.0.1", 8080), new File("test"));
+        try {
+            broadcaster.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            broadcaster.stop();
+        }
+    }
 }
 
